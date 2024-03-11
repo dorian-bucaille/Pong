@@ -49,6 +49,32 @@
 
       // Update game
       function updateGame() {
+        // Logique de déplacement pour le paddle droit
+        if (upPressed) {
+          rightPaddleY -= 7;
+          if (rightPaddleY < 0) {
+            rightPaddleY = 0;
+          }
+        } else if (downPressed) {
+          rightPaddleY += 7;
+          if (rightPaddleY + paddleHeight > canvas.height) {
+            rightPaddleY = canvas.height - paddleHeight;
+          }
+        }
+
+        // Logique de déplacement pour le paddle gauche
+        if (zPressed) {
+          leftPaddleY -= 7;
+          if (leftPaddleY < 0) {
+            leftPaddleY = 0;
+          }
+        } else if (sPressed) {
+          leftPaddleY += 7;
+          if (leftPaddleY + paddleHeight > canvas.height) {
+            leftPaddleY = canvas.height - paddleHeight;
+          }
+        }
+
         displayScores();
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -82,11 +108,28 @@
           }
         }
 
+        // Mise à jour des scores
+        if (ballX + ballDeltaX > canvas.width - ballRadius) {
+          scoreLeft++;
+          ballX = canvas.width / 2;
+          ballY = canvas.height / 2;
+          ballDeltaX = -ballDeltaX;
+          ballDeltaY = -ballDeltaY;
+        } else if (ballX + ballDeltaX < ballRadius) {
+          scoreRight++;
+          ballX = canvas.width / 2;
+          ballY = canvas.height / 2;
+          ballDeltaX = -ballDeltaX;
+          ballDeltaY = -ballDeltaY;
+        }
+
         requestAnimationFrame(updateGame);
       }
 
       let upPressed = false;
       let downPressed = false;
+      let zPressed = false; // Pour le paddle gauche
+      let sPressed = false; // Pour le paddle gauche
 
       document.addEventListener("keydown", keyDownHandler, false);
       document.addEventListener("keyup", keyUpHandler, false);
@@ -97,6 +140,11 @@
         } else if (e.key == "Down" || e.key == "ArrowDown") {
           downPressed = true;
         }
+        if (e.key == "z" || e.key == "Z") {
+          zPressed = true;
+        } else if (e.key == "s" || e.key == "S") {
+          sPressed = true;
+        }
       }
 
       function keyUpHandler(e) {
@@ -104,6 +152,11 @@
           upPressed = false;
         } else if (e.key == "Down" || e.key == "ArrowDown") {
           downPressed = false;
+        }
+        if (e.key == "z" || e.key == "Z") {
+          zPressed = false;
+        } else if (e.key == "s" || e.key == "S") {
+          sPressed = false;
         }
       }
 
