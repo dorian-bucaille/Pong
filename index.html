@@ -49,6 +49,8 @@
 
       // Update game
       function updateGame() {
+        displayScores();
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawPaddle(0, leftPaddleY);
         drawPaddle(canvas.width - paddleWidth, rightPaddleY);
@@ -116,6 +118,36 @@
         if (rightPaddleY + paddleHeight > canvas.height) {
           rightPaddleY = canvas.height - paddleHeight;
         }
+      }
+
+      let scoreLeft = 0;
+      let scoreRight = 0;
+
+      // Update this logic in the updateGame function
+      if (ballX + ballDeltaX > canvas.width - ballRadius) {
+        // Ball missed the right paddle, left scores
+        scoreLeft++;
+        // Reset the ball to the center
+        ballX = canvas.width / 2;
+        ballY = canvas.height / 2;
+        ballDeltaX = -ballDeltaX;
+        ballDeltaY = -ballDeltaY;
+      } else if (ballX + ballDeltaX < ballRadius) {
+        // Ball missed the left paddle, right scores
+        scoreRight++;
+        // Reset the ball to the center
+        ballX = canvas.width / 2;
+        ballY = canvas.height / 2;
+        ballDeltaX = -ballDeltaX;
+        ballDeltaY = -ballDeltaY;
+      }
+
+      // Display the scores
+      function displayScores() {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#FFF";
+        ctx.fillText("Left: " + scoreLeft, 8, 20);
+        ctx.fillText("Right: " + scoreRight, canvas.width - 65, 20);
       }
 
       updateGame();
