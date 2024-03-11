@@ -1,5 +1,10 @@
+body {
+    background-color: #000; /* Fond noir pour faire ressortir les couleurs néon */
+}
+
 canvas {
-    background: #000;
+    border: 5px solid #2ECC71; /* Bordure néon verte */
     display: block;
     margin: 0 auto;
+    box-shadow: 0 0 20px #2ECC71; /* Ombre portée néon pour donner un effet lumineux */
 }

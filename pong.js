@@ -36,22 +36,26 @@ function keyHandler(e) {
 function drawPaddle(x, y) {
     ctx.beginPath();
     ctx.rect(x, y, paddleWidth, paddleHeight);
-    ctx.fillStyle = "#FFF";
+    ctx.fillStyle = "#2ECC71"; // Couleur néon verte pour les raquettes
     ctx.fill();
+    ctx.shadowBlur = 20;
+    ctx.shadowColor = "#2ECC71"; // Ombre portée néon pour donner un effet lumineux
     ctx.closePath();
 }
 
 function drawBall() {
     ctx.beginPath();
     ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
-    ctx.fillStyle = "#FFF";
+    ctx.fillStyle = "#FF0062"; // Couleur néon rose pour la balle
     ctx.fill();
+    ctx.shadowBlur = 20;
+    ctx.shadowColor = "#FF0062"; // Ombre portée néon pour donner un effet lumineux
     ctx.closePath();
 }
 
 function displayScores() {
     ctx.font = "16px Arial";
-    ctx.fillStyle = "#FFF";
+    ctx.fillStyle = "#FFF"; // Texte en blanc pour contraster avec le fond noir
     ctx.fillText("Left: " + scoreLeft, 8, 20);
     ctx.fillText("Right: " + scoreRight, canvas.width - 65, 20);
 }
