@@ -66,8 +66,19 @@
           ballDeltaY = -ballDeltaY;
         }
 
-        // Paddle collision
-        // Implement paddle collision logic here
+        // Right paddle collision
+        if (ballX + ballDeltaX > canvas.width - ballRadius - paddleWidth) {
+          if (ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight) {
+            ballDeltaX = -ballDeltaX;
+          }
+        }
+
+        // Left paddle collision
+        if (ballX + ballDeltaX < ballRadius + paddleWidth) {
+          if (ballY > leftPaddleY && ballY < leftPaddleY + paddleHeight) {
+            ballDeltaX = -ballDeltaX;
+          }
+        }
 
         requestAnimationFrame(updateGame);
       }
